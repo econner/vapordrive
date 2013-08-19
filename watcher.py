@@ -38,8 +38,6 @@ class Syncer(threading.Thread):
         super(Syncer, self).__init__()
 
         self.source = _ensure_trailing_slash_present(source)
-        # self.remote_spec = _ensure_trailing_slash_present(
-        #     self.options.remote_spec)
 
         self.lock = threading.Lock()
         self.last_event = 0
@@ -68,8 +66,6 @@ class Syncer(threading.Thread):
                 s3_key = os.path.join(root, filename)
 
                 ext = os.path.splitext(filename)[-1]
-
-                print "EXTENSION IS:", ext
 
                 if not ext == ".remote":
                     s3.upload(s3_key)
@@ -106,7 +102,7 @@ if __name__ == '__main__':
     from watchdog.observers import Observer
     from watchdog.events import FileSystemEventHandler
 
-    source = "/Users/eric/Documents/work/vapordrive/vapor"
+    source = "vapor"
 
     syncer = Syncer(source)
     syncer.start()
